@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/ashishmuley', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/ashishmuley', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://twitter.com/ashishmuley', label: 'Twitter' },
-  { icon: Mail, href: 'mailto:ashish@muley.dev', label: 'Email' },
+  { icon: Github, href: 'https://github.com/', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com/', label: 'LinkedIn' },
+  { icon: Twitter, href: 'https://twitter.com/', label: 'Twitter' },
+  { icon: Mail, href: 'mailto:mail.ashishmuley@gmail.com', label: 'Email' },
 ];
 
 const navLinks = [
