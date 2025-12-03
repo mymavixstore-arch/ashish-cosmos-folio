@@ -1,44 +1,36 @@
 import { motion } from 'framer-motion';
-import { Download, MapPin, Calendar, Briefcase, GraduationCap, Code2, Camera, Palette } from 'lucide-react';
+import { Download, MapPin, Calendar, Briefcase, GraduationCap, Code2, Cpu, Wrench } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
-
-const skills = [
-  { name: 'React / Next.js', level: 95 },
-  { name: 'TypeScript', level: 90 },
-  { name: 'Node.js', level: 85 },
-  { name: 'Python', level: 80 },
-  { name: 'PostgreSQL', level: 85 },
-  { name: 'AWS / Cloud', level: 75 },
-];
+import { ExpertiseTabs } from '@/components/about/ExpertiseTabs';
 
 const timeline = [
   {
     year: '2023 - Present',
-    title: 'Senior Full-Stack Developer',
-    company: 'Tech Innovations Inc.',
-    description: 'Leading development of enterprise SaaS products, mentoring junior developers, and architecting scalable solutions.',
-    icon: Briefcase,
+    title: 'Instrumentation Design Engineer',
+    company: 'EPC Projects',
+    description: 'Working on large-scale SPI/Intools projects for ADNOC, Technip Energies, and other major clients.',
+    icon: Wrench,
   },
   {
-    year: '2021 - 2023',
-    title: 'Full-Stack Developer',
-    company: 'Digital Solutions Co.',
-    description: 'Built and maintained multiple client projects, implemented CI/CD pipelines, and improved team workflows.',
+    year: '2019 - Present',
+    title: 'IoT Developer & Hardware Engineer',
+    company: 'Freelance & R&D',
+    description: 'Developing custom IoT solutions, embedded systems, PCB designs, and automation projects.',
+    icon: Cpu,
+  },
+  {
+    year: '2018 - 2023',
+    title: 'Engineering Projects',
+    company: 'Various Clients',
+    description: '100+ industrial and R&D projects completed across multiple domains.',
     icon: Code2,
   },
   {
-    year: '2019 - 2021',
-    title: 'Frontend Developer',
-    company: 'StartupXYZ',
-    description: 'Developed responsive web applications, collaborated with design teams, and optimized performance.',
-    icon: Palette,
-  },
-  {
     year: '2015 - 2019',
-    title: 'B.Tech in Computer Science',
-    company: 'University of Technology',
-    description: 'Specialized in software engineering and machine learning. Published research on AI applications.',
+    title: 'B.Tech in Instrumentation',
+    company: 'University',
+    description: 'Specialized in instrumentation engineering with focus on automation and control systems.',
     icon: GraduationCap,
   },
 ];
@@ -65,18 +57,21 @@ export default function About() {
                 </span>
                 <span className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-primary" />
-                  5+ Years Experience
+                  1.5+ Years (Instrumentation) | 5+ Years (IoT & Projects)
                 </span>
               </div>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                I'm Ashish M. Muley, a passionate full-stack developer and photographer based in Mumbai. 
-                I specialize in building scalable web applications and capturing moments that tell stories.
+                I'm Ashish M. Muley, an Instrumentation Design Engineer and IoT Developer from Mumbai. 
+                I specialize in SPI/Intools, SPEL, IoT systems, PCB design, automation, and engineering project development.
               </p>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                My journey in tech started with curiosity about how things work on the internet. Today, 
-                I create digital experiences that combine technical excellence with thoughtful design. 
-                When I'm not coding, you'll find me exploring nature with my camera or experimenting 
-                with new technologies.
+                My journey began with building small embedded systems and understanding how hardware interacts with the real world. 
+                Today, I work on large-scale industrial instrumentation projects, create intelligent IoT solutions, 
+                and develop smart engineering tools that improve productivity and accuracy.
+              </p>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                When I'm not working on SPI/SPEL or hardware projects, you'll find me experimenting with robotics, 
+                designing PCBs, testing new sensors, or learning the latest technologies that push innovation forward.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button variant="hero" asChild>
@@ -86,7 +81,7 @@ export default function About() {
                   </a>
                 </Button>
                 <Button variant="outline" asChild>
-                  <a href="mailto:ashish@muley.dev">
+                  <a href="mailto:mail.ashishmuley@gmail.com">
                     Get In Touch
                   </a>
                 </Button>
@@ -112,43 +107,8 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Skills */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-20"
-          >
-            <h2 className="text-3xl font-display font-bold mb-8 text-center">
-              Technical <span className="gradient-text">Skills</span>
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-              {skills.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass-card p-4"
-                >
-                  <div className="flex justify-between mb-2">
-                    <span className="font-medium">{skill.name}</span>
-                    <span className="text-primary font-semibold">{skill.level}%</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-secondary overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
-                      className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          {/* Expertise Tabs */}
+          <ExpertiseTabs />
 
           {/* Timeline */}
           <motion.div
@@ -203,13 +163,13 @@ export default function About() {
             className="mt-20 text-center"
           >
             <h2 className="text-3xl font-display font-bold mb-8">
-              Beyond <span className="gradient-text">Code</span>
+              Beyond <span className="gradient-text">Work</span>
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
-                { icon: Camera, label: 'Photography' },
+                { icon: Cpu, label: 'Robotics' },
                 { icon: Code2, label: 'Open Source' },
-                { icon: Palette, label: 'UI Design' },
+                { icon: Wrench, label: 'PCB Design' },
               ].map((interest, index) => (
                 <motion.div
                   key={interest.label}

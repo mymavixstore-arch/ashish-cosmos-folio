@@ -33,10 +33,10 @@ export function HeroSection() {
             Hi, I'm{' '}
             <span className="gradient-text">Ashish</span>
             <br />
-            I Build Digital
+            I Design Intelligent
             <br />
             <span className="relative">
-              Experiences
+              Systems
               <svg
                 className="absolute -bottom-2 left-0 w-full"
                 viewBox="0 0 300 12"
@@ -62,8 +62,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Full-stack developer and photographer with a passion for creating 
-            immersive digital products that blend technical excellence with artistic vision.
+            Instrumentation design engineer specializing in SPI/SPEL, IoT systems, and automation—combining technical depth with practical innovation.
           </motion.p>
 
           {/* CTAs */}
