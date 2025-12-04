@@ -1,7 +1,30 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Environment } from '@react-three/drei';
 import * as THREE from 'three';
+
+// Check WebGL support
+function isWebGLAvailable() {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+  } catch (e) {
+    return false;
+  }
+}
+
+// Static fallback for robotic arm
+function StaticArmFallback() {
+  return (
+    <div className="w-full h-[300px] md:h-[350px] flex items-center justify-center">
+      <div className="relative">
+        <div className="w-16 h-16 rounded-full bg-primary/20 animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 w-8 h-24 bg-muted-foreground/20 rounded-lg -translate-x-1/2 rotate-12 animate-pulse" style={{ animationDelay: '0.3s' }} />
+        <div className="absolute top-0 left-1/2 w-6 h-16 bg-primary/30 rounded-lg -translate-x-1/2 -rotate-12 animate-pulse" style={{ animationDelay: '0.6s' }} />
+      </div>
+    </div>
+  );
+}
 
 // Industrial robotic arm segment
 function ArmSegment({ 
@@ -225,12 +248,24 @@ function ArmParticles() {
 }
 
 export function RoboticArm() {
+  const [webGLSupported, setWebGLSupported] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setWebGLSupported(isWebGLAvailable());
+  }, []);
+
+  if (!webGLSupported || hasError) {
+    return <StaticArmFallback />;
+  }
+
   return (
     <div className="w-full h-[300px] md:h-[350px]">
       <Canvas
         camera={{ position: [3, 2, 4], fov: 45 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'low-power', failIfMajorPerformanceCaveat: true }}
+        onError={() => setHasError(true)}
       >
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
