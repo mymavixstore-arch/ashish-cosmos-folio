@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Cpu, Bot, Microchip, Gauge } from 'lucide-react';
 
 const expertiseTabs = [
   {
     id: 'embedded',
-    label: 'Embedded & Hardware',
+    label: 'Embedded',
+    fullLabel: 'Embedded & Hardware',
+    icon: Cpu,
     skills: [
       'PCB Design',
       'Battery Pack Design',
@@ -22,7 +25,9 @@ const expertiseTabs = [
   },
   {
     id: 'ai',
-    label: 'AI & Automation',
+    label: 'AI',
+    fullLabel: 'AI & Automation',
+    icon: Bot,
     skills: [
       'N8N Automation',
       'Firebase',
@@ -34,7 +39,9 @@ const expertiseTabs = [
   },
   {
     id: 'microcontrollers',
-    label: 'Microcontrollers & Platforms',
+    label: 'MCUs',
+    fullLabel: 'Microcontrollers',
+    icon: Microchip,
     skills: [
       'Arduino Series',
       'ESP32 Series',
@@ -46,17 +53,19 @@ const expertiseTabs = [
   },
   {
     id: 'instrumentation',
-    label: 'Instrumentation',
+    label: 'Instr.',
+    fullLabel: 'Instrumentation',
+    icon: Gauge,
     skills: [
-      'Instrument Index & I/O List Management',
-      'Instrument Datasheets & Specifications',
-      'Wiring & Loop Diagram Generation',
-      'Instrument Hook-Up Diagrams',
-      'SPI Intools Administration & Setup',
-      'User Access Management & Backups',
-      'Report Generation & Templates',
+      'Instrument Index & I/O List',
+      'Datasheets & Specifications',
+      'Wiring & Loop Diagrams',
+      'Hook-Up Diagrams',
+      'SPI Intools Admin',
+      'Access & Backups',
+      'Report Generation',
       'Procurement Support',
-      'Technical Training & Support',
+      'Technical Training',
       'Project Documentation',
     ],
   },
@@ -68,21 +77,23 @@ export function ExpertiseTabs() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mb-20"
+      className="mb-12 md:mb-20"
     >
-      <h2 className="text-3xl font-display font-bold mb-8 text-center">
+      <h2 className="text-2xl sm:text-3xl font-display font-bold mb-6 md:mb-8 text-center">
         Technical <span className="gradient-text">Expertise</span>
       </h2>
       
       <Tabs defaultValue="embedded" className="max-w-4xl mx-auto">
-        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 mb-8">
+        <TabsList className="grid w-full grid-cols-4 mb-6 md:mb-8 h-auto p-1">
           {expertiseTabs.map((tab) => (
             <TabsTrigger 
               key={tab.id} 
               value={tab.id}
-              className="text-xs sm:text-sm"
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 py-2 px-1 sm:px-3 text-[10px] sm:text-sm data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
             >
-              {tab.label}
+              <tab.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">{tab.fullLabel}</span>
+              <span className="sm:hidden">{tab.label}</span>
             </TabsTrigger>
           ))}
         </TabsList>
@@ -93,19 +104,19 @@ export function ExpertiseTabs() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="glass-card p-6"
+              className="glass-card p-4 sm:p-6"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {tab.skills.map((skill, index) => (
                   <motion.div
                     key={skill}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
+                    className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors"
                   >
-                    <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-                    <span className="text-sm font-medium">{skill}</span>
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary flex-shrink-0" />
+                    <span className="text-xs sm:text-sm font-medium">{skill}</span>
                   </motion.div>
                 ))}
               </div>
