@@ -1,7 +1,30 @@
-import { useRef, useMemo, Suspense } from 'react';
+import { useRef, useMemo, Suspense, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Points, PointMaterial, Float, OrbitControls } from '@react-three/drei';
+import { Points, PointMaterial, Float } from '@react-three/drei';
 import * as THREE from 'three';
+
+// Check WebGL support
+function isWebGLAvailable() {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+  } catch (e) {
+    return false;
+  }
+}
+
+// Static fallback component
+function StaticFallback() {
+  return (
+    <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10" />
+      <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-primary/40 animate-pulse" />
+      <div className="absolute top-1/3 right-1/3 w-1 h-1 rounded-full bg-accent/50 animate-pulse" style={{ animationDelay: '0.5s' }} />
+      <div className="absolute bottom-1/4 right-1/4 w-3 h-3 rounded-full bg-primary/30 animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-2/3 left-1/3 w-1.5 h-1.5 rounded-full bg-accent/40 animate-pulse" style={{ animationDelay: '1.5s' }} />
+    </div>
+  );
+}
 
 // Electrons: Small, fast, blue-cyan colored
 function Electrons({ count = 2000 }) {
@@ -199,12 +222,27 @@ function Scene() {
 }
 
 export function ParticleUniverse() {
+  const [webGLSupported, setWebGLSupported] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setWebGLSupported(isWebGLAvailable());
+  }, []);
+
+  if (!webGLSupported || hasError) {
+    return <StaticFallback />;
+  }
+
   return (
     <div className="absolute inset-0 -z-10">
       <Canvas
         camera={{ position: [0, 0, 8], fov: 60 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'low-power', failIfMajorPerformanceCaveat: true }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x0B1220, 1);
+        }}
+        onError={() => setHasError(true)}
       >
         <Suspense fallback={null}>
           <Scene />
