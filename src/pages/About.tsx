@@ -3,7 +3,7 @@ import { Download, MapPin, Calendar, Briefcase, GraduationCap, Code2, Cpu, Wrenc
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { ExpertiseTabs } from '@/components/about/ExpertiseTabs';
-
+import { RoboticArm } from '@/components/three/RoboticArm';
 const timeline = [
   {
     year: '2023 - Present',
@@ -94,6 +94,11 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
+              {/* 3D Robotic Arm */}
+              <div className="mb-4">
+                <RoboticArm />
+              </div>
+              
               <div className="aspect-square rounded-3xl overflow-hidden glass-card p-2">
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop"
